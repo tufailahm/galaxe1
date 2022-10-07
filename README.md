@@ -90,7 +90,127 @@ default
 
 
 
-tufailahmedkhan@gmail.com
+https://github.com/tufailahm/galaxe1
+
+
+
+
+
+
+
+
+
+
+Constructors
+==============
+
+special method which has the same name as the class name
+it does not have any return type . not even void
+It gets called automatically whenever you create an object.
+It is used to initialize the member variables
+
+
+this keyword
+==============
+
+
+
+String class
+=================
+
+java.lang
+array of characters
+immutable - cannot be changed
+String name = "Kalpana";
+String name = new String("Kalpana");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+String
+StringBuffer
+StringBuilder
+
+Overloading
+================
+
+
+Var args
+JDK 1.5
+
+
+Inheritance
+=======================
+extends
+
+
+
+
+
+
+
+
+
 
 
 
