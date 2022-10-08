@@ -1,4 +1,4 @@
-package day2;
+package day3;
 
 class Vehicle{
 	int price=100000;
@@ -10,7 +10,11 @@ class Vehicle{
 		System.out.println("Vehicle stopped");
 	}
 }
-class Car extends Vehicle
+interface Radio {
+		int frequency = 90;
+		void scanChannels();
+}
+class Car extends Vehicle implements MusicSystem,Radio
 {
 	int price=300000;
 	String acType;
@@ -23,6 +27,16 @@ class Car extends Vehicle
 		System.out.println("Local price :"+price);
 		System.out.println("car price"+this.price);
 		System.out.println("Vehicle price :"+super.price);
+	}
+	@Override
+	public void playMusic() {
+		
+		
+	}
+	@Override
+	public void scanChannels() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 class Bike extends Vehicle
@@ -40,6 +54,7 @@ public class InheritanceDemo {
 	public static void main(String[] args) {
 			Car c = new Car();
 			c.start();
+			c.scanChannels();
 			c.startAC();
 			c.stop();
 	}

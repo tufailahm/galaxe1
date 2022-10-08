@@ -205,6 +205,29 @@ extends
 
 
 
+https://github.com/tufailahm/galaxe1
+
+
+
+Inheritance
+Overriding
+abstract class
+===================
+
+
+
+
+interfaces
+--------------
+pure abstraction
+by default all rge methods in an interface are abstract
+-- constants	(final)
+
+GC
+
+
+Object class and its methods
+
 
 
 
