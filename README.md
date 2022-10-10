@@ -228,6 +228,105 @@ GC
 
 Object class and its methods
 
+Exception Handling
+
+
+
+Customer
+	customerId
+	customerName
+	customerAddress
+	billAmount
+
+
+
+Exception Handling
+=====================
+
+Compilation
+Logical error
+Runtime errors
+
+Why exception handling is required ?
+
+1) to end program gracefully
+2) to give proper message
+3) do some closing operations
+
+
+
+
+try
+catch
+finally
+
+
+
+Throwable
+
+
+
+throw		- is used to bring exception
+
+
+throws
+User defined exception
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+File I/O
+
+JAVA.IO 
+
+
+file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
