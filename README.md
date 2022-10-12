@@ -294,6 +294,85 @@ JAVA.IO
 
 file
 
+File IO, Threads
+
+
+Streams
+
+
+InputStream	- Reading
+OutputStream 	- Writing
+
+
+
+Reader
+Writer
+
+
+
+
+
+
+
+
+
+
+
+
+Thread
+===============================
+Process within a process
+
+by extending the Thread class	- java.lang
+	run()
+
+by implemntation Runnable interface	- java.lang
+	run()
+
+
+#1: 3
+#3: 3
+#3: 2
+#3: 1
+#2: 3
+#2: 2
+#2: 1
+#1: 2
+#1: 1
+
+
+
+Thread safety
+
+
+Collections
+==================
+framework used for different data structures
+reduces programming efforts
+easy learning curve
+performance of your app will be good
+already tested
+
+java.util
+
+<I>					Collection
+
+<I>	List				Set
+	accept duplicate values		not accept duplicate values
+
+
+<C>	ArrayList	(Not sync)		HashSet - - no order is guranteed
+	LinkedList			TreeSet - sorted
+	Vector	(Sync and Thread safe)	LinkedHashSet -as it is 
+
+
+
+Iterator
+
+
+
+Collections	- class
+Lots of useful static methods
 
 
 
