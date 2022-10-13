@@ -378,6 +378,23 @@ Lots of useful static methods
 
 
 
+Map
+Anonymous Inner classes
+Comparator
+Comparable
+New Features of JDK1.8
+Design Principles
+Design Patterns
+
+
+HashMap	- no order
+TreeMap	-sorted
+LinkedHashMap	-  as it is
+
+
+Comparator	- jav.util		compare(p1,p2)
+
+Comparable	- java.lang	- compareTo(p1);
 
 
 
@@ -397,6 +414,17 @@ Lots of useful static methods
 
 
 
+JDK5
+jdk1.8 new features
+==================
+
+Lambdas Expression
+only works with functional interfaces
+-- interfaces with a single method
+interface Calculation
+{
+	void operation(int num1,int num2);
+}
 
 
 
@@ -405,13 +433,8 @@ Lots of useful static methods
 
 
 
-
-
-
-
-
-
-
+Design Principle
+Design Patterns
 
 
 

@@ -7,7 +7,10 @@ public class Hello {
 }
 class Customer extends Hello
 {
-	public void display() {
+	int price;
+	public void display(Customer p) {
+		this.price = 90;
+		p.price = 908;
 		System.out.println(i);
 		Hello h = new Hello();
 		System.out.println(h.i);
@@ -16,6 +19,8 @@ class Customer extends Hello
 class Employee {
 	public void display() {
 		Hello h = new Hello();
+		Customer c = new Customer();
+		c.display(c);
 		System.out.println(h.i);
 	}
 }

@@ -2,6 +2,7 @@ package day6;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Demo7_Searching {
 		names.add("Aman");
 		names.add("Vamsi");
 		
-		Collections.sort(names);
+		Collections.sort(names, Comparator.reverseOrder());
 		
 		System.out.println(names);
 		System.out.println(Collections.binarySearch(names, "Anu"));

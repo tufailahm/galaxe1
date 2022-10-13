@@ -39,7 +39,6 @@ public class Demo4 {
 		System.out.println(names);
 		names.clear();
 	}
-
 	public static void main(String[] args) {
 		new Demo4();
 	}

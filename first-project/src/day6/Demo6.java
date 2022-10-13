@@ -9,10 +9,11 @@ public class Demo6 {
 	
 	public Demo6() {
 		names = new TreeSet();	//no order is guranteed
-		
+		 
 		names.add("Vamsi");
 		names.add("Purshottam");
 		names.add("Sandeep");
+		names.add("Anu");
 		names.add("Sohail");
 		names.add("Vamsi");
 		
