@@ -439,14 +439,19 @@ Design Patterns
 
 
 
+Hibernate - ORM
+
+
+something.save(product);
+
+something.update(product);
 
 
 
+Use case :  We have to store product info in db.
 
 
-
-
-
+galaxeblr	- DB - Mysql
 
 
 
