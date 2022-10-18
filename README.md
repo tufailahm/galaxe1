@@ -453,6 +453,37 @@ Use case :  We have to store product info in db.
 
 galaxeblr	- DB - Mysql
 
+https://github.com/tufailahm/galaxe1/blob/master/hibernate_jar-files.zip
+
+
+
+
+Hibernate - Day2
+====================
+
+Product App
+Problem - 
+Solution
+HQL - Hibernate Query Language - similar to SQL
+=========================
+select * from Product;	- Query
+
+Criteria
+
+Lifecycle of Hibernate
+Sync
+Inheritance Mapping
+===================
+
+
+
+
+
+
+
+
+
+
 
 
 
