@@ -476,6 +476,133 @@ Inheritance Mapping
 ===================
 
 
+Spring
+=============
+framework
+Important terms
+Autowiring - The process by which Spring identifies dependencies and matches and populates them.
+
+Bean - A Spring bean is an object that is instantiated, created, and managed by the IoC container. Beans are the backbone of an application.
+
+Dependency injection - A programming design pattern that makes code loosely coupled, meaning that any change in the application of one, will not affect the other.
+
+Inversion of control (IoC) - Taking control away from the class and giving it to the Spring Framework.
+
+Inversion of control container - This is the core of the Spring Framework where objects are created, wired together, configured, and managed throughout their life cycle.
+
+
+Spring
+---------------
+Lots of configuration
+
+Spring Boot
+--------------
+Zero configuration
+Embedded Tomcat
+Just run
+
+
+Order
+Review
+OrderDetails
+
+
+getDetails()
+
+
+
+=========
+
+product-app-final2
+
+String Data JPA
+Spring Web
+Devtools
+MySQL
+
+localhost:9090/welcome
+
+
+==============
+Rest Parameters
+
+@PathVariable
+
+
+HTTP methods
+------------------
+
+GET	-retrieve/fetch 
+POST	-save/create
+PUT	-update/modify
+DELETE	-remove
+
+
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/galaxe
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=create
+
+
+Use case : Create a product back end app that should serve the front end app
+
+Way 1
+
+http:\\localhost:9090/product/getProduct/101
+http:\\localhost:9090/product/getAllProduct
+
+
+http:\\localhost:9090/product/saveProduct
+http:\\localhost:9090/product/updateProduct
+
+http:\\localhost:9090/product/deleteProduct
+
+
+Way2 
+http://localhost:9090/product	- GET
+http://localhost:9090/product/101	- GET
+http://localhost:9090/product/101	- 
+
+
+
+
+
+
+http://localhost:9090/product	- POST 
+http://localhost:9090/product	- PUT
+
+
+==============================
+
+JPA
+
+CrudRepository
+
+
+Two requirements :
+2) If qoh or price is negative , we dont want to insert	- resolved
+
+1) If duplicate id is given , this is to handled properly
+
+
+Http Status Codes
+
+200
+
+300
+
+400
+
+500
+
+ResponseEntity
+
+@CrossOrigin(origins = "http://localhost:4200")
+
+
+http://localhost:9090/product
 
 
 
@@ -483,10 +610,10 @@ Inheritance Mapping
 
 
 
+1) If duplicate id is given , this is to handled properly
+--------------------------------------------------------------------
 
-
-
-
+ResponseEntity
 
 
 
