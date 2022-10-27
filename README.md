@@ -616,6 +616,717 @@ http://localhost:9090/product
 ResponseEntity
 
 
+================================
+Day 13
+=========
+-> Http Status Codes
+Spring JPA keywords
+Lombok
+AOP 
+Actuator
+
+Use case : If duplicate id is given , this is to handled properly
+
+404
+400
+500
+200
+204
+
+ResponseEntity
+
+
+
+Use case : If the product already exists , then appropriate message and status code also to be sent
+Lombok
+=============
+Third party library which reduces boilerplate code of model class.
+JPA keywords
+==============
+
+use case : 
+http://localhost:9090/product/searchByProductName/Car
+
+
+
+public List<Product> findByProductName(String productName);
+public List<Product> findByPrice(int price);	
+public List<Product> findByPriceBetween(int min,int max);	
+
+
+
+use case : http://localhost:9090/product/searchByProductPriceRange/100/300
+
+
+Day 14
+==============
+AOP (Aspect Oriented Programming )
+====================================
+Cross cutting concerns
+
+security
+logging
+transaction
+
+
+@Before
+@After
+@Around
+@Throws
+
+
+
+Point cut expressions
+
+*
+
+Use case : I want to do logging for every methods of service impl 
+
+
+Actuator
+Microservices
+Spring Data Rest
+
+
+
+
+
+Monolith vs Microservices
+
+
+Small team ?
+Dynamic team ?
+Diverse tech teams ?
+
+amazon
+	products		http://localhost:9090/product
+	carts
+	orders
+	wishlist
+	reviews		http://localhost:9091/reviews
+
+http://localhost:9091/reviews	- GET
+http://localhost:9091/reviews/1	- GET
+http://localhost:9091/reviews	- POST
+http://localhost:9091/reviews/1	- PUT
+http://localhost:9091/reviews/1	- DELETE
+	
+	primevideo
+	delivery
+
+
+Spring Data Rest
+--------------------
+Rest Repositories
+
+
+
+
+Spring Actuator
+===============
+
+by which monitoring your app
+
+Use case : I want to see how many beans are there in application
+
+
+
+
+
+
+
+
+
+
+
+
+
+Spring Security - Demo1
+
+
+
+
+
+
+
+
+
+
+package com.training;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+	@RequestMapping("/hello")
+	public String hello() {
+		return "Hello and welcome";
+	}
+}
+
+
+
+==========
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@EnableWebSecurity
+public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
+
+	@Autowired
+	private MyUserDetailsService myUserDetailService = null;
+
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+			
+			auth.userDetailsService(myUserDetailService);
+		}
+	//No hashing is required
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return NoOpPasswordEncoder.getInstance();
+		}
+}
+
+
+==================
+
+package com.training;
+import java.util.ArrayList;
+
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyUserDetailsService implements UserDetailsService{
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return new User("tufail", "ahmed", new ArrayList<>());
+	}
+
+	
+}
+
+==================
+** From the previous program, We don’t need MyUserDetailsService and SecurityConfigurer.java
+Custom login form and adding some fine grained permissions :
+
+Security - Demo2
+
+pom.xml
+
+<!-- JSTL tag lib -->
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!-- Tomcat for JSP rendering -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+application.properties
+
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+
+======================
+
+Create /src/main/webapp/WEB-INF/views/login.jsp
+
+==========================
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="contextPath" value=""/>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Log in with your credentials</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <form method="POST" action="/login" class="form-signin">
+        <h2 class="form-heading">Log in</h2>
+
+        <div class="form-group ">
+            <span></span>
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span></span>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        </div>
+
+    </form>
+
+</div>
+<!-- /container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></body>
+</html>
+
+
+
+===============================================
+
+
+package com.training;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+@EnableWebSecurity
+public class EmployeeSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**");
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/index").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/viewAllProducts").hasAnyRole("USER", "ADMIN").antMatchers("/addProduct")
+				.hasAnyRole("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+				.and().logout().permitAll();
+
+		http.csrf().disable();
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
+		authenticationMgr.inMemoryAuthentication()
+				.withUser("admin").password("admin").authorities("ROLE_USER").and()
+				.withUser("tufail").password("ahmed").authorities("ROLE_USER", "ROLE_ADMIN");
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+}
+
+
+=================
+
+package com.training;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+	@RequestMapping("/hello")
+	public String hello() {
+		return "Hello and welcome";
+	}
+	
+}
+
+
+UserDetailService
+
+loadByUsername
+
+==================
+package com.training;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+@Controller
+public class LoginController {
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model, String error, String logout) {
+		if (error != null)
+			model.addAttribute("errorMsg", "Your username and password are invalid.");
+
+		if (logout != null)
+			model.addAttribute("msg", "You have been logged out successfully.");
+
+		return "login";
+	}
+
+}
+
+
+=======================
+
+Day 15
+
+Communicate with other services
+
+
+localhost:9090/product/191
+
+
+localhost:9091/reviews
+
+Use case : I want to fetch a product by giving productid 
+
+FeignClient
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Bean
+Spring Security
+Spring MVC 
+
+
+
+Git
+SCM
+File I/O
+
+
+
+
+
+
+
+
+==================================
+Day 15
+
+Communication between services
+=======================
+http://localhost:9090/product
+http://localhost:9091/reviews	-
+
+Use case : Reviews services needs to fetch product using product id
+
+OpenFeign - FeignClient - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Spring Security
+
+Use case : We want to secure or URI 
+	http://localhost:9090/product	
+
+
+@Bean
+Spring MVC
+Spring Security using customer login form
+
+
+
+Day 16
+Dev Ops Essentials
+Git SCM
+
+
+
+
+
+
+
+Spring MVC
+================
+MVC - Model View Controller
+
+@RestController	- JSON			--> Application
+@Controller	- Views(JSP/HTML)		--> Users
+
+
+Step 1: Create a project with lombok,web, devtools
+Step 2: Configure mvc 
+
+a) update pom.xml
+<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!-- Tomcat for JSP rendering -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+b)
+application.properties
+server.port=9094
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+
+c)
+Right click on your project and create folder
+ /src/main/webapp/WEB-INF/views
+
+
+
+
+
+Use case : I want implement fine grained authorization and authentication - Custom Login Form
+
+1) Add Spring security dependency
+2) Create login.jsp
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:set var="contextPath" value=""/>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Log in with your credentials - Galaxe LoginPage</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <form method="POST" action="/login" class="form-signin">
+        <h2 class="form-heading">Log in</h2>
+
+        <div class="form-group ">
+            <span></span>
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span></span>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        </div>
+
+    </form>
+
+</div>
+<!-- /container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></body>
+</html>
+
+3. Create LoginController.java
+package com.training.pms.galaxe.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+@Controller
+public class LoginController {
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model, String error, String logout) {
+		if (error != null)
+			model.addAttribute("errorMsg", "Your username and password are invalid.");
+
+		if (logout != null)
+			model.addAttribute("msg", "You have been logged out successfully.");
+
+		return "login";
+	}
+
+}
+
+4. package com.training.pms.galaxe.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Configuration
+@EnableWebSecurity
+public class EmployeeSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**");
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/index").hasAnyRole("USER")
+				.antMatchers("/viewAllProducts").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/addProduct").hasAnyRole("ADMIN")
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+				.and().logout().permitAll();
+
+		http.csrf().disable();
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
+		authenticationMgr.inMemoryAuthentication()
+				.withUser("yash").password("yash123").authorities("ROLE_USER").and()
+				.withUser("tufail").password("ahmed123").authorities("ROLE_USER", "ROLE_ADMIN");
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+}
+
+5. Updated HomeController
+package com.training.pms.galaxe.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HomeController {
+
+
+	@GetMapping("index")			//   http://localhost:9094/home
+	public String home() {
+		return "ashraf";				///WEB-INF/views/ashraf.jsp
+	}	
+
+	@GetMapping	//   http://localhost:9094
+	public String hello() {
+		return "index";				///WEB-INF/views/index.jsp
+	}	
+	
+	@GetMapping("viewAllProducts")			//   http://localhost:9094/home
+	public String jasdasd() {
+		return "viewAllProducts";				///WEB-INF/views/ashraf.jsp
+	}	
+	
+	@GetMapping("addProduct")			//   http://localhost:9094/home
+	public String levin() {
+		return "addProducts";				///WEB-INF/views/ashraf.jsp
+	}	
+}
+
+
+
+6. Create jsps as shonw above.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
